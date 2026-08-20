@@ -88,11 +88,22 @@ def add_bias_column(X):
     bias = np.ones((X.shape[0], 1))
     return np.hstack([bias, X])
 
-# Step 10 - make_shuffled_indices (not yet solved)
-# TODO: implement
+# Step 10 - make_shuffled_indices
+def make_shuffled_indices(n_samples, seed):
+    # TODO: Create a reproducibly shuffled permutation of row indices.
+    rng = np.random.default_rng(seed)
+    return rng.permutation(n_samples)
 
-# Step 11 - partition_indices (not yet solved)
-# TODO: implement
+# Step 11 - partition_indices
+def partition_indices(indices, train_ratio, val_ratio):
+    # TODO: Split a shuffled index array into train, validation, and test index arrays.
+    n = len(indices) 
+    n_train = int(n * train_ratio)
+    n_val = int(n * val_ratio)
+    train = indices[0 : n_train]
+    val = indices[n_train : n_train + n_val]
+    test = indices[n_train + n_val :]
+    return train , val , test
 
 # Step 12 - subset_xy (not yet solved)
 # TODO: implement
