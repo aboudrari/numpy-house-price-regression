@@ -168,9 +168,9 @@ def r_squared(y_true, y_pred):
 def residual_summary(y_true, y_pred):
     # TODO: Return a compact dict summarizing prediction residuals...
     r = y_true - y_pred
-    mean = np.mean(r)
-    std = np.std(r)
-    median_abs = np.median(np.abs(r))
+    mean = float(np.mean(r))
+    std = float(np.std(r))
+    median_abs = float(np.median(np.abs(r)))
     return {'mean':mean ,'std':std ,'median_abs':median_abs}
 
 # Step 19 - prepare_cleaned_features (not yet solved)
