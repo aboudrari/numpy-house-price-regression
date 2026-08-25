@@ -200,8 +200,24 @@ def assemble_feature_matrix(X_num, ratio_num_idx, ratio_den_idx, cat_labels=None
         X = np.hstack([X, one_hot_encode(cat_labels)])
     return X
 
-# Step 21 - make_train_val_test (not yet solved)
-# TODO: implement
+# Step 21 - make_train_val_test
+def make_train_val_test(X, y, train_ratio, val_ratio, seed):
+    rng = np.random.RandomState(seed)
+    idx = rng.permutation(len(y))
+    
+    n = len(y)
+    n_train = int(n * train_ratio)
+    n_val = int(n * val_ratio)
+    
+    train_idx = idx[:n_train]
+    val_idx   = idx[n_train : n_train + n_val]
+    test_idx  = idx[n_train + n_val:]
+    
+    return {
+        'X_train': X[train_idx], 'y_train': y[train_idx],
+        'X_val':   X[val_idx],   'y_val':   y[val_idx],
+        'X_test':  X[test_idx],  'y_test':  y[test_idx],
+    }
 
 # Step 22 - standardize_and_add_bias (not yet solved)
 # TODO: implement
