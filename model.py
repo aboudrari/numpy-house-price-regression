@@ -247,6 +247,38 @@ def evaluate_predictions(y_true, y_pred):
         'residual_summary': residual_summary(y_true, y_pred)
     }
 
-# Step 24 - house_price_pipeline (not yet solved)
-# TODO: implement
+# Step 24 - house_price_pipeline
+def house_price_pipeline(X, y, ratio_num_idx, ratio_den_idx,
+                         cat_labels=None, train_ratio=0.7,
+                         val_ratio=0.15, seed=42, iqr_k=1.5):
+    # 1. Clean
+    X_clean = prepare_cleaned_features(X, iqr_k=iqr_k)
+
+    # 2. Assemble features (ratio + optional one-hot)
+    X_feat = assemble_feature_matrix(X_clean, ratio_num_idx, ratio_den_idx, cat_labels)
+
+    # 3. Split
+    splits = make_train_val_test(X_feat, y, train_ratio, val_ratio, seed)
+
+    # 4. Standardize + bias
+    std_splits, mean, std = standardize_and_add_bias(splits)
+
+    # 5. Fit OLS on train (lstsq handles singular/near-singular cases)
+    theta, _, _, _ = np.linalg.lstsq(std_splits['X_train'], std_splits['y_train'], rcond=None)
+
+    # 6. Predict on val and test
+    y_val_pred  = ols_predict(std_splits['X_val'],  theta)
+    y_test_pred = ols_predict(std_splits['X_test'], theta)
+
+    # 7. Evaluate
+    val_metrics  = evaluate_predictions(std_splits['y_val'],  y_val_pred)
+    test_metrics = evaluate_predictions(std_splits['y_test'], y_test_pred)
+
+    return {
+        'theta':        theta,
+        'y_test':       std_splits['y_test'],
+        'y_test_pred':  y_test_pred,
+        'test_metrics': test_metrics,
+        'val_metrics':  val_metrics,
+    }
 
