@@ -225,7 +225,7 @@ def standardize_and_add_bias(splits):
     
     mean = X_train.mean(axis=0)
     std = X_train.std(axis=0)
-    std = np.where(std == 0, 1.0, std)  # ← fix: avoid division by zero
+    std = np.where(std == 0, 1.0, std)  
     
     std_splits = {}
     for key in ['X_train', 'X_val', 'X_test']:
