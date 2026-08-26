@@ -219,8 +219,24 @@ def make_train_val_test(X, y, train_ratio, val_ratio, seed):
         'X_test':  X[test_idx],  'y_test':  y[test_idx],
     }
 
-# Step 22 - standardize_and_add_bias (not yet solved)
-# TODO: implement
+# Step 22 - standardize_and_add_bias
+def standardize_and_add_bias(splits):
+    X_train = splits['X_train']
+    
+    mean = X_train.mean(axis=0)
+    std = X_train.std(axis=0)
+    std = np.where(std == 0, 1.0, std)  # ← fix: avoid division by zero
+    
+    std_splits = {}
+    for key in ['X_train', 'X_val', 'X_test']:
+        X_std = (splits[key] - mean) / std
+        bias = np.ones((X_std.shape[0], 1))
+        std_splits[key] = np.hstack([bias, X_std])
+    
+    for key in ['y_train', 'y_val', 'y_test']:
+        std_splits[key] = splits[key]
+    
+    return std_splits, mean, std
 
 # Step 23 - evaluate_predictions (not yet solved)
 # TODO: implement
