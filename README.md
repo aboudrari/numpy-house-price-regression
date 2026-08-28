@@ -1,40 +1,179 @@
-# NumPy House Price Regression
+🏠 NumPy House Price Regression
 
-Build a complete end-to-end house-price regressor in pure NumPy: clean tabular features, engineer simple derived and categorical encodings, split reproducibly, fit OLS via the normal equation, and report MAE, RMSE, R-squared, plus residual stats on held-out homes.
+An end-to-end House Price Regression project built entirely with NumPy, without relying on high-level machine learning libraries such as Scikit-learn.
 
-## How to run
+The project implements the complete machine learning pipeline from data cleaning and feature engineering to Ordinary Least Squares (OLS) regression, evaluation, and residual analysis.
 
-```bash
+⸻
+
+🚀 Project Overview
+
+The goal of this project is to predict house prices using a tabular dataset while implementing the core components of a regression pipeline from scratch.
+
+The workflow includes:
+
+Raw Data → Cleaning → Feature Engineering → Encoding → Standardization → Train/Validation/Test Split → OLS Regression → Predictions → Evaluation
+
+The model is trained using the Normal Equation, providing a practical implementation of linear regression using only NumPy.
+
+⸻
+
+🧠 What This Project Covers
+
+* Handling missing values
+* Detecting and handling outliers using IQR
+* Feature engineering
+* Ratio-based features
+* Categorical feature encoding
+* Feature standardization
+* Reproducible dataset splitting
+* Linear regression from scratch
+* OLS using the Normal Equation
+* Model predictions
+* Regression evaluation metrics
+* Residual analysis
+
+⸻
+
+🛠️ Tech Stack
+
+* Python
+* NumPy
+* Linear Algebra
+* Statistics
+* Machine Learning
+
+No Scikit-learn or high-level ML framework is used for the regression pipeline.
+
+⸻
+
+📊 Machine Learning Pipeline
+
+1. Data Cleaning
+
+Missing numerical values are handled using mean imputation.
+
+Outliers are detected using the Interquartile Range (IQR) method and clipped to predefined bounds.
+
+2. Feature Engineering
+
+Additional features are created from the original data, including ratio-based features.
+
+Categorical variables are converted into numerical representations using one-hot encoding.
+
+3. Feature Scaling
+
+Numerical features are standardized before training.
+
+A bias/intercept column is then added to the feature matrix.
+
+4. Dataset Splitting
+
+The dataset is shuffled using a reproducible random process and divided into:
+
+* Training set
+* Validation set
+* Test set
+
+5. Model Training
+
+The regression model is implemented from scratch using Ordinary Least Squares (OLS) and the Normal Equation.
+
+6. Evaluation
+
+The trained model is evaluated on held-out data using:
+
+* MAE — Mean Absolute Error
+* RMSE — Root Mean Squared Error
+* R² — R-squared
+* Residual Statistics
+
+⸻
+
+✅ Implementation Checklist
+
+Data Preprocessing
+
+* impute_nan_with_mean
+* compute_iqr_bounds
+* clip_columns
+
+Feature Engineering
+
+* make_ratio_feature
+* append_column
+* one_hot_encode
+
+Feature Scaling
+
+* fit_standardizer
+* apply_standardizer
+* add_bias_column
+
+Dataset Preparation
+
+* make_shuffled_indices
+* partition_indices
+* subset_xy
+
+Regression Model
+
+* ols_fit
+* ols_predict
+
+Evaluation
+
+* mean_absolute_error
+* root_mean_squared_error
+* r_squared
+* residual_summary
+
+Pipeline
+
+* prepare_cleaned_features
+* assemble_feature_matrix
+* make_train_val_test
+* standardize_and_add_bias
+
+⸻
+
+▶️ How to Run
+
+Clone the repository and run:
+
 python scaffold.py
-```
 
-## Steps
+The script executes the complete preprocessing, training, and evaluation pipeline.
 
-- [x] **1.** impute_nan_with_mean
-- [x] **2.** compute_iqr_bounds
-- [x] **3.** clip_columns
-- [x] **4.** make_ratio_feature
-- [x] **5.** append_column
-- [x] **6.** one_hot_encode
-- [x] **7.** fit_standardizer
-- [x] **8.** apply_standardizer
-- [x] **9.** add_bias_column
-- [x] **10.** make_shuffled_indices
-- [x] **11.** partition_indices
-- [x] **12.** subset_xy
-- [x] **13.** ols_fit
-- [x] **14.** ols_predict
-- [x] **15.** mean_absolute_error
-- [x] **16.** root_mean_squared_error
-- [x] **17.** r_squared
-- [x] **18.** residual_summary
-- [x] **19.** prepare_cleaned_features
-- [x] **20.** assemble_feature_matrix
-- [x] **21.** make_train_val_test
-- [x] **22.** standardize_and_add_bias
-- [x] **23.** evaluate_predictions
-- [x] **24.** house_price_pipeline
+⸻
 
----
+📚 Learning Objectives
 
-Built on Deep-ML.
+This project is designed to strengthen understanding of the mathematical and practical foundations behind regression models.
+
+Instead of using a ready-made implementation, the main components are built using NumPy, making it easier to understand what happens internally during a typical machine learning workflow.
+
+Key concepts include:
+
+* Linear algebra
+* Matrix operations
+* Feature preprocessing
+* One-hot encoding
+* Standardization
+* Least Squares
+* Model evaluation
+* Residual analysis
+
+⸻
+
+🎯 Project Status
+
+Status: Completed ✅
+
+All major components of the NumPy regression pipeline have been implemented.
+
+⸻
+
+📖 Reference
+
+Built as part of the Deep-ML learning journey.
